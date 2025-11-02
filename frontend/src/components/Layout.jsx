@@ -7,22 +7,22 @@ export default function Layout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   return (
-    
-      
-        
-        
-        
-          <Header 
-            darkMode={darkMode}
-            setDarkMode={setDarkMode}
-            toggleSidebar={() => setSidebarOpen(!sidebarOpen)}
-          />
-          
-          
-            {children}
-          
-        
-      
-    
+    <div className={`flex min-h-screen ${darkMode ? 'dark bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
+      {/* Sidebar */}
+      <Sidebar sidebarOpen={sidebarOpen} />
+
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col transition-all duration-300">
+        {/* Header */}
+        <Header
+          darkMode={darkMode}
+          setDarkMode={setDarkMode}
+          toggleSidebar={() => setSidebarOpen(!sidebarOpen)}
+        />
+
+        {/* Page Content */}
+        <main className="flex-1 p-6">{children}</main>
+      </div>
+    </div>
   );
 }
